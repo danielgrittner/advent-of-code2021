@@ -36,7 +36,6 @@ def solve2(l: List[int]) -> int:
     return cnt
 
 
-
 if __name__ == "__main__":
     l = read_input(sys.argv[1])
     print(solve1(l))
