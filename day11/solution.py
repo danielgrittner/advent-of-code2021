@@ -47,7 +47,6 @@ def _simulate_step(l: List[List[int]]) -> int:
                                 q.append((x+1, y-1))
                             if y + 1 < len(l[x+1]):
                                 q.append((x+1, y+1))
-                
             else:
                 l[i][j] += 1
 
