@@ -9,14 +9,6 @@ def _read_input(path: str) -> List[List[int]]:
     return [list(map(int, list(line[:-1]))) for line in file_content]
 
 
-def _print_field(l: List[List[int]]) -> None:
-    for row in l:
-        s = ''
-        for ele in row:
-            s += str(ele)
-        print(s)
-
-
 def _simulate_step(l: List[List[int]]) -> int:
     flashes = 0
     
