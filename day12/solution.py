@@ -7,7 +7,7 @@ VISITED = True
 NOT_VISITED = False
 
 
-def _read_input(path: str) -> dict:
+def read_input(path: str) -> dict:
     with open(path, "r") as file_handle:
         file_content = file_handle.readlines()
 
@@ -77,6 +77,6 @@ def solve2(graph: dict) -> int:
 
 if __name__ == "__main__":
     input_path = sys.argv[1]
-    g = _read_input(input_path)
+    g = read_input(input_path)
     print(solve1(g))
     print(solve2(g))

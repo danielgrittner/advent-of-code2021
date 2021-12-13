@@ -56,7 +56,7 @@ class SparseFloor:
         return 0
 
 
-def read_input(path: str, ignore_diag_lines) -> SparseFloor:
+def _read_input(path: str, ignore_diag_lines) -> SparseFloor:
     with open(path, "r") as file_handle:
         file_content = [[pos.split(',') for pos in line[:-1].split(' -> ')] for line in file_handle.readlines()]
     
@@ -67,8 +67,8 @@ def read_input(path: str, ignore_diag_lines) -> SparseFloor:
     return sparse_floor
 
 
-def count(path: str, diag_lines: bool) -> int:
-    sparse_floor = read_input(path, diag_lines)
+def _count(path: str, diag_lines: bool) -> int:
+    sparse_floor = _read_input(path, diag_lines)
 
     cnt = 0
 
@@ -82,11 +82,11 @@ def count(path: str, diag_lines: bool) -> int:
 
 
 def solve1(path: str) -> int:
-    return count(path, True)
+    return _count(path, True)
 
 
 def solve2(path: str) -> int:
-    return count(path, False)
+    return _count(path, False)
 
 
 if __name__ == "__main__":

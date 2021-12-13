@@ -2,7 +2,7 @@ import sys
 from typing import List, Optional, Tuple
 
 
-def _read_input(path: str) -> List[str]:
+def read_input(path: str) -> List[str]:
     with open(path, "r") as file_handle:
         file_content = file_handle.readlines()
     return [line[:-1] for line in file_content]
@@ -76,6 +76,6 @@ def solve2(l: List[str]) -> int:
 
 if __name__ == "__main__":
     input_path = sys.argv[1]
-    l = _read_input(input_path)
+    l = read_input(input_path)
     print(solve1(l))
     print(solve2(l))

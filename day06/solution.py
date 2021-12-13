@@ -15,7 +15,7 @@ def read_input(path: str) -> List[int]:
     return state
 
 
-def simulate(days: int, state: List[int]) -> int:
+def _simulate(days: int, state: List[int]) -> int:
     for _ in range(days):
         new_state = [0 for _ in range(9)]
         
@@ -32,11 +32,11 @@ def simulate(days: int, state: List[int]) -> int:
 
 
 def solve1(state: List[int]) -> int:
-    return simulate(80, state)
+    return _simulate(80, state)
 
 
 def solve2(state: List[int]) -> int:
-    return simulate(256, state)
+    return _simulate(256, state)
 
 
 if __name__ == "__main__":

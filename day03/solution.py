@@ -10,7 +10,7 @@ def read_input(path: str) -> List[List[bool]]:
     return list(map(lambda l:list( map(lambda bit: bit == '1', l[:-1])), file_content))
 
 
-def calculate_bit_distributions(l: List[List[bool]]) -> Tuple[List[int], List[int]]:
+def _calculate_bit_distributions(l: List[List[bool]]) -> Tuple[List[int], List[int]]:
     bit_length = len(l[0])
 
     one_counts = [0 for _ in range(bit_length)]
@@ -27,7 +27,7 @@ def calculate_bit_distributions(l: List[List[bool]]) -> Tuple[List[int], List[in
 
 
 def solve1(l: List[List[bool]]):
-    one_counts, zero_counts = calculate_bit_distributions(l)
+    one_counts, zero_counts = _calculate_bit_distributions(l)
 
     # Construct gamma and epsilon rate
     gamma_rate = 0
@@ -53,7 +53,7 @@ def search(l: List[List[bool]], bit_criteria: Callable) -> List[bool]:
         if len(l) == 1:
             break
 
-        one_counts, zero_counts = calculate_bit_distributions(l)
+        one_counts, zero_counts = _calculate_bit_distributions(l)
 
         keep_bit = bit_criteria(i, one_counts, zero_counts)
         l = list(filter(lambda num: num[i] == keep_bit, l))

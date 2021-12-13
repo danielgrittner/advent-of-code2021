@@ -3,7 +3,7 @@ from typing import List
 from collections import deque
 
 
-def _read_input(path: str) -> List[List[int]]:
+def read_input(path: str) -> List[List[int]]:
     with open(path, "r") as file_handle:
         file_content = file_handle.readlines()
     return [list(map(int, list(line[:-1]))) for line in file_content]
@@ -82,6 +82,6 @@ def solve2(l: List[List[int]]) -> int:
 
 if __name__ == "__main__":
     input_path = sys.argv[1]
-    l = _read_input(input_path)
+    l = read_input(input_path)
     print(solve1(l))
     print(solve2(l))

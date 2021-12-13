@@ -17,7 +17,7 @@ class Signals:
         return self.output_value
 
 
-def _read_input(path: str) -> List[Signals]:
+def read_input(path: str) -> List[Signals]:
     with open(path, "r") as file_handle:
         file_content = file_handle.readlines()
         file_content = [[x.split() for x in line[:-1].split(' | ')] for line in file_content]
@@ -225,6 +225,6 @@ def solve2(signals: List[Signals]) -> int:
 
 if __name__ == "__main__":
     input_path = sys.argv[1]
-    l = _read_input(input_path)
+    l = read_input(input_path)
     print(solve1(l))
     print(solve2(l))
