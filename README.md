@@ -11,4 +11,7 @@
 - [X] Day 9
 - [X] Day 10
 - [X] Day 11
-- [ ] Day 12
+- [X] Day 12
+- [X] Day 13
+- [ ] Day 14
+- [ ] Day 15
