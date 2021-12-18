@@ -137,7 +137,7 @@ class PacketNode:
         return res
 
 
-def build_packet_tree(packet: bitarray) -> Tuple[PacketNode, int]:
+def _build_packet_tree(packet: bitarray) -> Tuple[PacketNode, int]:
     if _get_packet_type(packet) == PacketType.LITERAL:
         _, end = _get_literal_value(packet)
         return PacketNode(packet[:end]), end
@@ -150,7 +150,7 @@ def build_packet_tree(packet: bitarray) -> Tuple[PacketNode, int]:
         length = 0
         i = 22
         while length < total_length:
-            child, sub_packet_length = build_packet_tree(packet[i:])
+            child, sub_packet_length = _build_packet_tree(packet[i:])
             children.append(child)
             length += sub_packet_length
             assert length <= total_length
@@ -164,11 +164,15 @@ def build_packet_tree(packet: bitarray) -> Tuple[PacketNode, int]:
 
         i = 18
         while len(children) < num_sub_packets:
-            child, length = build_packet_tree(packet[i:])
+            child, length = _build_packet_tree(packet[i:])
             children.append(child)
             i += length
 
         return PacketNode(packet[:i], children), i
+
+
+def build_packet_tree(packet: bitarray) -> PacketNode:
+    return _build_packet_tree(packet)[0]
 
 
 def solve1(packet_tree: PacketNode) -> int:
@@ -182,6 +186,6 @@ def solve2(packet_tree: PacketNode) -> int:
 if __name__ == "__main__":
     input_path = sys.argv[1]
     packet = read_input(input_path)
-    packet_tree, _ = build_packet_tree(packet)
+    packet_tree = build_packet_tree(packet)
     print(solve1(packet_tree))
     print(solve2(packet_tree))
