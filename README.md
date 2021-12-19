@@ -16,5 +16,5 @@
 - [X] Day 14
 - [X] Day 15
 - [X] Day 16
-- [ ] Day 17
+- [X] Day 17 (TODO: Improve solution => really ugly)
 - [ ] Day 18
