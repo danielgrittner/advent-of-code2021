@@ -18,3 +18,4 @@
 - [X] Day 16
 - [X] Day 17 (TODO: Improve brounds)
 - [ ] Day 18
+- [ ] Day 19
