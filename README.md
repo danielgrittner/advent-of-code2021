@@ -16,5 +16,5 @@
 - [X] Day 14
 - [X] Day 15
 - [X] Day 16
-- [X] Day 17 (TODO: Improve solution => really ugly)
+- [X] Day 17 (TODO: Improve brounds)
 - [ ] Day 18
