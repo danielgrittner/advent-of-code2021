@@ -18,7 +18,7 @@ class Node(object):
         return
 
     @abc.abstractmethod
-    def _reduce_with_split(self) -> Tuple[bool, 'Node']:
+    def _reduce_with_split(self, depth: int) -> Tuple[bool, 'Node']:
         return
 
     @abc.abstractmethod
@@ -94,15 +94,19 @@ class Pair(Node):
         self.right.parent = self
         return self
 
-    def _reduce_with_split(self) -> Tuple[bool, 'Node']:
-        did_split, self.left = self.left._reduce_with_split()
+    def _reduce_with_split(self, depth: int) -> Tuple[bool, 'Node']:
+        did_split, self.left = self.left._reduce_with_split(depth + 1)
         self.left.parent = self
         if did_split:
+            self.left = self.left._reduce_with_explosion(depth + 1)
+            self.left.parent = self
             return True, self
 
-        did_split, self.right = self.right._reduce_with_split()
+        did_split, self.right = self.right._reduce_with_split(depth + 1)
         self.right.parent = self
         if did_split:
+            self.right = self.right._reduce_with_explosion(depth + 1)
+            self.right.parent = self
             return True, self
         
         return False, self
@@ -111,9 +115,9 @@ class Pair(Node):
         new_pair = Pair(self, other)
         
         # Reduce new pair
+        new_pair = new_pair._reduce_with_explosion(0)
         while True:
-            new_pair = new_pair._reduce_with_explosion(0)
-            did_split, new_pair = new_pair._reduce_with_split()
+            did_split, new_pair = new_pair._reduce_with_split(0)
             if not did_split:
                 break
 
@@ -152,7 +156,7 @@ class RegularNumber(Node):
     def _reduce_with_explosion(self, _: int) -> 'Node':
         return self
 
-    def _reduce_with_split(self) -> Tuple[bool, 'Node']:
+    def _reduce_with_split(self, _: int) -> Tuple[bool, 'Node']:
         if self.value >= 10:
             return self._split()
         return False, self
