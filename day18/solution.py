@@ -94,7 +94,7 @@ class Pair(Node):
         self.right.parent = self
         return self
 
-    def _reduce_with_split(self, depth: int) -> Tuple[bool, 'Node']:
+    def _reduce_with_split(self, depth: int) -> Tuple[bool, Node]:
         did_split, self.left = self.left._reduce_with_split(depth + 1)
         self.left.parent = self
         if did_split:
@@ -144,7 +144,6 @@ class RegularNumber(Node):
         return self.value
 
     def _split(self) -> Tuple[bool, Node]:
-        # Perform split
         left_val = self.value // 2
         left_node = RegularNumber(left_val)
 
@@ -153,10 +152,10 @@ class RegularNumber(Node):
 
         return True, Pair(left_node, right_node)
 
-    def _reduce_with_explosion(self, _: int) -> 'Node':
+    def _reduce_with_explosion(self, _: int) -> Node:
         return self
 
-    def _reduce_with_split(self, _: int) -> Tuple[bool, 'Node']:
+    def _reduce_with_split(self, _: int) -> Tuple[bool, Node]:
         if self.value >= 10:
             return self._split()
         return False, self
@@ -168,7 +167,7 @@ class RegularNumber(Node):
         return RegularNumber(self.value)
     
 
-def parse_pair(pair: str) -> List[Pair]:
+def _parse_pair(pair: str) -> List[Pair]:
     stack = []
     for c in pair:
         if c.isdigit():
@@ -185,7 +184,7 @@ def parse_pair(pair: str) -> List[Pair]:
 def read_input(path: str) -> List[Pair]:
     with open(path, "r") as file_handle:
         file_content = file_handle.readlines()
-    return [parse_pair(line[:-1]) for line in file_content]
+    return [_parse_pair(line[:-1]) for line in file_content]
 
 
 def solve1(snail_numbers: List[Pair]) -> int:
