@@ -50,8 +50,8 @@ def _move_player(memo: dict, rolls: int, p1: int, score_p1: int, p2: int, score_
         if score_p1 >= 21:
             # P1 won!
             return 1, 0
-        
-        # Other players turn!
+
+        # Other player's turn!
         wins_p2, wins_p1 = _move_player(memo, 0, p2, score_p2, p1, score_p1)
         result = wins_p1, wins_p2
         memo[key] = result
