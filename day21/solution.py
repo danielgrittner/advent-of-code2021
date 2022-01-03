@@ -40,10 +40,10 @@ def solve1(p1: int, p2: int) -> int:
         return score_p1 * rolls
 
 
-def _move_player(cache: dict, rolls: int, p1: int, score_p1: int, p2: int, score_p2: int) -> Tuple[int, int]:
+def _move_player(memo: dict, rolls: int, p1: int, score_p1: int, p2: int, score_p2: int) -> Tuple[int, int]:
     key = (rolls, p1, score_p1, p2, score_p2)
-    if key in cache:
-        return cache[key]
+    if key in memo:
+        return memo[key]
     
     if rolls == 3:
         score_p1 += p1 + 1
@@ -52,20 +52,20 @@ def _move_player(cache: dict, rolls: int, p1: int, score_p1: int, p2: int, score
             return 1, 0
         
         # Other players turn!
-        wins_p2, wins_p1 = _move_player(cache, 0, p2, score_p2, p1, score_p1)
+        wins_p2, wins_p1 = _move_player(memo, 0, p2, score_p2, p1, score_p1)
         result = wins_p1, wins_p2
-        cache[key] = result
+        memo[key] = result
 
         return result
 
     assert 0 <= rolls and rolls < 3
     
-    wins_p1_univ1, wins_p2_univ1 = _move_player(cache, rolls + 1, (p1 + 1) % 10, score_p1, p2, score_p2)
-    wins_p1_univ2, wins_p2_univ2 = _move_player(cache, rolls + 1, (p1 + 2) % 10, score_p1, p2, score_p2)
-    wins_p1_univ3, wins_p2_univ3 = _move_player(cache, rolls + 1, (p1 + 3) % 10, score_p1, p2, score_p2)
+    wins_p1_univ1, wins_p2_univ1 = _move_player(memo, rolls + 1, (p1 + 1) % 10, score_p1, p2, score_p2)
+    wins_p1_univ2, wins_p2_univ2 = _move_player(memo, rolls + 1, (p1 + 2) % 10, score_p1, p2, score_p2)
+    wins_p1_univ3, wins_p2_univ3 = _move_player(memo, rolls + 1, (p1 + 3) % 10, score_p1, p2, score_p2)
 
     result = wins_p1_univ1 + wins_p1_univ2 + wins_p1_univ3, wins_p2_univ1 + wins_p2_univ2 + wins_p2_univ3
-    cache[key] = result
+    memo[key] = result
     return result
 
 
